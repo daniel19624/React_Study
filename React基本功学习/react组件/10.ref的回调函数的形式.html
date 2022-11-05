@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react的核心库 -->
+    <script src="../资料/react.development.js"></script>
+    <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+    <script src="../资料/react-dom.development.js"></script>
+    <!-- 将jsx语句转换成浏览器认识的js语句 -->
+    <script src="../资料/babel.min.js"></script>
+    <script src="../资料/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        class Demo extends React.Component {
+            showData = () => {
+                alert(this.input1.value)
+            }
+            showData2 = () => {
+                alert(this.input2.value)
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={(c) => this.input1 = c} />
+                        <button onClick={this.showData} ref="button">点击显示input的内容</button>
+                        <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" />
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

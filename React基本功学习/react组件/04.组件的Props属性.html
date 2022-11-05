@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react的核心库 -->
+    <script src="../资料/react.development.js"></script>
+    <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+    <script src="../资料/react-dom.development.js"></script>
+    <!-- 将jsx语句转换成浏览器认识的js语句 -->
+    <script src="../资料/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <script type="text/babel">
+        class MyComponent extends React.Component {
+            render() {
+                return (
+                    <h1>
+                        <ul>
+                            <li>姓名: {this.props.name}</li>
+                            <li>性别: {this.props.gender}</li>
+                            <li>年龄: {this.props.age}</li>
+                        </ul>
+                    </h1>
+                )
+            }
+        }
+
+        const person = {
+            name: 'Tom',
+            age: 80,
+            gender: '女'
+        }
+        ReactDOM.render(<MyComponent name="Daniel" age="29" gender="男"/>, document.getElementById('test'))
+
+        ReactDOM.render(<MyComponent {...person}/> , document.getElementById('test1'))
+        /* 
+        批量传递属性的时候可以使用{...obj}的形式
+        
+        */
+    </script>
+</body>
+</html>

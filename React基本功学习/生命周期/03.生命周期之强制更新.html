@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react的核心库 -->
+    <script src="../资料/react.development.js"></script>
+    <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+    <script src="../资料/react-dom.development.js"></script>
+    <!-- 将jsx语句转换成浏览器认识的js语句 -->
+    <script src="../资料/babel.min.js"></script>
+    <script src="../资料/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        class Count extends React.Component {
+            constructor(props) {
+                console.log('constructor');
+                super(props)
+            }
+            state = {
+                count: 1
+            }
+            addCount = () => {
+                let {count} = this.state
+                this.setState({count: count + 1})
+            }
+
+            componentWillMount() {
+                console.log('componentWillMount');
+            }
+            render() {
+                console.log('render');
+                return (
+                    <div>
+                        <h4>现在的数字是：{this.state.count}</h4>
+                        <button onClick={this.addCount}>点击加一</button>
+                        <button onClick={this.forceUpdateComponent}>forceUpdate</button>
+                    </div>
+                )
+            }
+            forceUpdateComponent = () => {
+                this.forceUpdate()
+            }
+
+            componentDidMount() {
+                console.log('componentDidMount');
+            }
+
+            shouldComponentUpdate() {
+                console.log('shouldComponentUpdate');
+                return false
+            }
+
+            componentWillUpdate() {
+                console.log('componentWillUpdate');
+            }
+
+            componentDidUpdate() {
+                console.log('componentDidUpdate');
+            }
+        }
+
+        ReactDOM.render(<Count/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

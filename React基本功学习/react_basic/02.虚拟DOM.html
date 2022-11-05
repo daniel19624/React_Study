@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!-- react的核心库 -->
+        <script src="../资料/react.development.js"></script>
+        <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+        <script src="../资料/react-dom.development.js"></script>
+        <!-- 将jsx语句转换成浏览器认识的js语句 -->
+        <script src="../资料/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        const VDOM = <h1>认识虚拟DOM</h1>
+        
+        ReactDOM.render(VDOM, document.getElementById('test'))
+
+        console.log(VDOM);
+
+        console.log(typeof VDOM);
+        console.log(VDOM instanceof Object);
+    </script>
+</body>
+</html>

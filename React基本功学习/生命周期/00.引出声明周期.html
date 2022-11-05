@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react的核心库 -->
+    <script src="../资料/react.development.js"></script>
+    <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+    <script src="../资料/react-dom.development.js"></script>
+    <!-- 将jsx语句转换成浏览器认识的js语句 -->
+    <script src="../资料/babel.min.js"></script>
+    <script src="../资料/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+
+        class Life extends React.Component {
+            state = {
+                opacity: 1
+            }
+            dead = () => {
+                // 卸载组件
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            render() {
+                return (
+                    <div>
+                        <h1 style={{opacity: this.state.opacity}}>React 学不会，怎么办？</h1>
+                        <button onClick={this.dead}>不活了</button>
+                    </div>
+                )
+            }
+            componentDidMount() {
+                if (this.timer) return
+                this.timer = setInterval(() => {
+                    console.log('render');
+                    let {opacity} = this.state
+                    opacity = opacity - 0.1
+                    if (opacity <= 0) opacity = 1
+                    this.setState({opacity})
+                }, 200)
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.timer)
+            }
+        }
+
+        ReactDOM.render(<Life/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

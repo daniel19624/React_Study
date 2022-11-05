@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- react的核心库 -->
+    <script src="../资料/react.development.js"></script>
+    <!-- 帮助react将真实的DOM转换成虚拟DOM，再转换成真实的DOM -->
+    <script src="../资料/react-dom.development.js"></script>
+    <!-- 将jsx语句转换成浏览器认识的js语句 -->
+    <script src="../资料/babel.min.js"></script>
+    <script src="../资料/prop-types.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/babel">
+        class Person extends React.Component {
+            render () {
+                return (
+                    <h1>
+                        <ul>
+                            <li>姓名: {this.props.name}</li>
+                            <li>年龄: {this.props.age}</li>
+                            <li>性别: {this.props.gender}</li>
+                            <li>方法: {this.props.speak()}</li>
+                        </ul>
+                    </h1>
+                )
+            }
+        }
+        /* 
+            为组件定义的props的属性定义默认值和规范
+
+        */
+
+        Person.propTypes = {
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number,
+            gender: PropTypes.string,
+            speak: PropTypes.func
+        }
+
+        ReactDOM.render(<Person name='Daniel' age={26} gender="男" speak={speak}/>, document.getElementById('test'))
+
+        function speak() {
+            console.log('我会唱歌');
+        }
+    </script>
+</body>
+</html>
